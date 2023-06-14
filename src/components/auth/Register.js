@@ -4,8 +4,9 @@ import "./Login.css";
 
 export const Register = (props) => {
     const [bowler, setBowler] = useState({
-        email: "",
-        name: ""
+        id: "",
+        name: "",
+        email: ""
     });
     let navigate = useNavigate();
 

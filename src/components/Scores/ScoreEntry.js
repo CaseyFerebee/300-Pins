@@ -1,3 +1,5 @@
-export const scoreEntry {
+
+    export const ScoreEntry = () => {
     
-}
+    };
+
