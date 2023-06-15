@@ -1,5 +1,7 @@
+import { Route } from "react-router-dom"
 import { FriendsList } from "../Scores/Friends"
 import { SubmitForm } from "../Scores/SubmitForm"
+
 
 
 
@@ -10,6 +12,7 @@ export const ApplicationViews = () => {
 
 	<SubmitForm />
     
+
 
 	<FriendsList />
 	</>

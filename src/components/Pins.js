@@ -7,10 +7,14 @@ import { Register } from "./auth/Register"
 import "./Pins.css"
 
 
+
 export const Pins = () => {
 	return <Routes>
 		<Route path="/login" element={<Login />} />
 		<Route path="/register" element={<Register />} />
+	
+
+		
 
 		<Route path="*" element={
 			<Authorized>

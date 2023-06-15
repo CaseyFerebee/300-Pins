@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
 import { getAllFriends } from '../dataManager/FriendsManager';
-import userEvent from '@testing-library/user-event';
+
 
 
 export const FriendsList = () => {

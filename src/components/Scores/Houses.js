@@ -6,9 +6,9 @@ import {
     DropdownMenu,
     DropdownItem,
 } from 'reactstrap';
-import PropTypes from 'prop-types';
 
-export const Houses = ({ down, ...args }) => {
+
+export const Houses = ({ down, setGameObj}) => {
     const [houses, setHouses] = useState([])
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedHouse,setSelectedHouse]= useState();
@@ -16,8 +16,11 @@ export const Houses = ({ down, ...args }) => {
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
     const handleClick=(e)=>{
-        console.log(e);
+        console.log(e)
         setSelectedHouse(e.target.innerText)
+        setGameObj((state) => {
+            return { ...state, houseId: parseInt(e.target.id)}
+        })
         }
     const getAllTheHouses = () => {
 
@@ -36,8 +39,8 @@ export const Houses = ({ down, ...args }) => {
         <>
             <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={down} onClick={handleClick}>
                 <DropdownToggle caret>{selectedHouse ? selectedHouse : <>House</>}</DropdownToggle>
-                <DropdownMenu {...args}  >
-                {houses.map((house) =>  <DropdownItem  key={house.id}>{house.name}</DropdownItem>)}
+                <DropdownMenu>
+                {houses.map((house) =>  <DropdownItem  key={house.id} id={house.id}>{house.name}</DropdownItem>)}
                 </DropdownMenu>
             </Dropdown>
         </>
@@ -45,6 +48,3 @@ export const Houses = ({ down, ...args }) => {
 
 }
 
-Houses.propTypes = {
-    direction: PropTypes.string,
-};

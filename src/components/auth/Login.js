@@ -1,33 +1,36 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate,  } from "react-router-dom";
 import "./Login.css"
 
 export const Login = () => {
     const [email, set] = useState("CaseyF@gmail.com")
     const navigate = useNavigate()
+;
 
     const handleLogin = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         return fetch(`http://localhost:8088/users?email=${email}`)
-            .then(res => res.json())
-            .then(foundUsers => {
+            .then((res) => res.json())
+            .then((foundUsers) => {
+                console.log(foundUsers); // Log the foundUsers array for debugging
+
                 if (foundUsers.length === 1) {
-                    const user = foundUsers[0]
-                    localStorage.setItem("bowler_user", JSON.stringify({
-                        id: user.id,
-                    
-                    }))
+                    const user = foundUsers[0];
+                    const userId = user.id // Capture the user ID
 
-                    navigate("/")
-                }
-                else {
-                    window.alert("Invalid login")
-                }
-            })
-    }
+                    localStorage.setItem("bowler_user", JSON.stringify({ id: userId, name: user.name, email: user.email }));
 
+                
+                    navigate(`/user/${userId}`);
+                    navigate("/");
+                } else {
+                    window.alert("Invalid login");
+                }
+            });
+    };
+
+    
     return (
         <main className="container--login">
             <section>
@@ -54,6 +57,7 @@ export const Login = () => {
                 <Link to="/register">Not a member yet?</Link>
             </section>
         </main>
+    
     )
 }
 
