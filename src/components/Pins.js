@@ -13,9 +13,6 @@ export const Pins = () => {
 		<Route path="/login" element={<Login />} />
 		<Route path="/register" element={<Register />} />
 	
-
-		
-
 		<Route path="*" element={
 			<Authorized>
 				<>

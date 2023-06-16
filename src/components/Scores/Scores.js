@@ -1,27 +1,25 @@
-import { Input } from "reactstrap"
+import { Input } from "reactstrap";
 
-
-export const ScoresInput = ({setGameObj}) => {
-
+export const ScoresInput = ({ score, setScore }) => {
     const handleInputChange = (event) => {
-        const newScore = parseInt(event.target.value)
-//setUserScore(newScore);
-        setGameObj(state => {
-            return { ...state, score: newScore}
-        })
-
+        const newScore = parseInt(event.target.value, 10);
+        if (!isNaN(newScore) && newScore >= 0 && newScore <= 300) {
+            setScore(newScore);
+        }
     };
 
     return (
         <div>
             <Input
+                required
                 className="w-50"
                 type="number"
                 min={0}
                 max={300}
                 step={1}
+                value={score}
                 onChange={handleInputChange}
             />
         </div>
-    )
-}
+    );
+};

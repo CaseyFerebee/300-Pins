@@ -6,7 +6,7 @@ export const getGamesByUserId = (userId) => {
 };
 
 
-export const AddGame = (gameOjb) => {
+export const addGame = (gameOjb) => {
     return fetch(`${url}/games`, {
         method: "POST",
         headers: {

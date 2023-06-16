@@ -8,10 +8,10 @@ import {
 } from 'reactstrap';
 
 
-export const Houses = ({ down, setGameObj}) => {
+export const Houses = ({down, setGameObj, selectedHouse, setSelectedHouse}) => {
     const [houses, setHouses] = useState([])
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [selectedHouse,setSelectedHouse]= useState();
+   
 
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
