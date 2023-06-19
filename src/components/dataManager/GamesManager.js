@@ -5,7 +5,6 @@ export const getGamesByUserId = (userId) => {
         .then((response) => response.json());
 };
 
-
 export const addGame = (gameOjb) => {
     return fetch(`${url}/games`, {
         method: "POST",

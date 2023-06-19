@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom"
-import { FriendsList } from "../Scores/Friends"
-import { SubmitForm } from "../Scores/SubmitForm"
+import { FriendsList } from "../submitForm/Friends"
+import { SubmitForm } from "../submitForm/SubmitForm"
+import { ScoresList } from "../scoresView/ScoresView"
 
 export const ApplicationViews = () => {
 
@@ -11,6 +12,9 @@ export const ApplicationViews = () => {
 	<SubmitForm />
     
 	<FriendsList />
+
+	<ScoresList />
+	
 	</>
 }
 
