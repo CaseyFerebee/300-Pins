@@ -56,7 +56,7 @@ export const FriendsList = () => {
                     )}
                 
                 </ButtonGroup>
-                <p>Selected: {JSON.stringify(cSelected)}</p>
+                {/* <p>Selected: {JSON.stringify(cSelected)}</p> */}
             </div>
         );
     }

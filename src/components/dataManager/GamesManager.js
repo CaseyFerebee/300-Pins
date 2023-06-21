@@ -17,3 +17,24 @@ export const addGame = (gameOjb) => {
 }
 
 
+export const deleteGame = (id) => {
+    return fetch(`${url}/games/${id}`, {
+        method: "DELETE"
+    })
+    .then(response => response.json())
+}
+
+export const editGame = (gameObj) => {
+    return fetch(`${url}/game/${gameObj.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(gameObj)
+    }).then(response => response.json())
+}
+
+export const getGameById = (gameId) => {
+    return fetch(`${url}/games?id=${gameId}`)
+        .then((response) => response.json());
+};

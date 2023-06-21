@@ -5,10 +5,9 @@ import { ScoresInput } from "./Scores";
 import { addGame } from "../dataManager/GamesManager";
 import { Button } from "reactstrap";
 
-export const SubmitForm = () => {
+export const SubmitForm = ({selectedHouse, setSelectedHouse}) => {
     const loggedInUser = JSON.parse(localStorage.getItem("bowler_user"));
     const [startDate, setStartDate] = useState(new Date());
-    const [selectedHouse,setSelectedHouse]= useState();
 
     const [gameObj, setGameObj] = useState({
         id: null,
