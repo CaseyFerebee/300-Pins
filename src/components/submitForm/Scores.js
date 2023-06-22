@@ -17,7 +17,7 @@ export const ScoresInput = ({ score, setScore }) => {
                 min={0}
                 max={300}
                 step={1}
-                value={score}
+                value={score || ""}
                 onChange={handleInputChange}
             />
         </div>

@@ -9,9 +9,9 @@ import {
 
 
 export const Houses = ({down, setGameObj, selectedHouse, setSelectedHouse}) => {
+    
     const [houses, setHouses] = useState([])
     const [dropdownOpen, setDropdownOpen] = useState(false);
-
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
     const handleClick=(e)=>{
@@ -35,7 +35,7 @@ export const Houses = ({down, setGameObj, selectedHouse, setSelectedHouse}) => {
 
     return (
         <>
-            <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={down} onChange={handleClick}>
+            <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={down} onClick={handleClick}>
                 <DropdownToggle caret={true}>{selectedHouse ? selectedHouse : <>House</>}</DropdownToggle>
                 <DropdownMenu>
                 {houses.map((house) =>  <DropdownItem  key={house.id} id={house.id}>{house.name}</DropdownItem>)}

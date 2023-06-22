@@ -4,26 +4,24 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-export const DateSubmit = ({setGameObj,setStartDate,startDate}) => {
-    
+export const DateSubmit = ({setGameObj,setStartDate,startDate ,selectedDate}) => {
     const handleChange = (date) => {
         setStartDate(date);
     };
-    const selectedDate = startDate.toLocaleDateString();
-
+    
     const onFormSubmit = (e) => {
         e.preventDefault();
         setGameObj((state) => {
-            return { ...state, date: selectedDate }
+            return { ...state, date: selectedDate}
         });
     
     };
 
     useEffect(() => {
         setGameObj((state) => {
-            return { ...state, date: selectedDate }
+            return { ...state, date:selectedDate }
         });
-    }, [startDate, setGameObj]);
+    }, [startDate, setGameObj, ]);
 
     return (
         <form onSubmit={onFormSubmit} >

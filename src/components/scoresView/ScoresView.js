@@ -5,7 +5,7 @@ import { getAllHouses } from "../dataManager/HouseManager";
 import { Houses } from "../submitForm/Houses";
 import { ScoresInput } from "../submitForm/Scores";
 
-export const ScoresView = ({selectedHouse, setSelectedHouse}) => {
+export const ScoresView = ({ selectedHouse, setSelectedHouse, setGameObj, gameObj }) => {
     const loggedInUser = JSON.parse(localStorage.getItem("bowler_user"));
     const [games, setGames] = useState([])
     const [houses, setHouses] = useState([])
@@ -16,7 +16,7 @@ export const ScoresView = ({selectedHouse, setSelectedHouse}) => {
         // Fetch the list of games for the logged-in user
         getGamesByUserId(loggedInUser?.id)
             .then((data) => {
-                
+
                 setGames(data);
             })
 
@@ -33,49 +33,51 @@ export const ScoresView = ({selectedHouse, setSelectedHouse}) => {
             .then(() => {
                 setGames((prevGames) => prevGames.filter((game) => game.id !== gameId))
             })
+            
     }
-    
-    
-    const handleInputChange = (gameId, e) => {
+
+    const handleInputChange = (gameId,e) => {
         toggle()
-        const updatedObject = {
-        id: gameId,
-        userId: loggedInUser?.id,
-        houseId: houses.id,
-        score: "",
-        date: "",
+        const updatedInputChange = {
+            id: gameId,
+            userId: loggedInUser?.id,
+            houseId: selectedHouse?.id,
+            score: e.target.value,
+            date: gameObj.date
+        }
+        setUpdatedGame(updatedInputChange)
     }
-    setUpdatedGame(updatedObject)
-    console.log(e)
-}
-    
 
     const handleUpdate = () => {
         toggle()
-        
-        editGame(updatedGame)
-        .then(() => {
-            setGames((prevGames) =>
-                prevGames.map((game) => (game.id === updatedGame.id ? { ...game, ...updatedGame } : game))
-            )
-        })
+        const updatedObject = {
+            id: updatedGame.id,
+            userId: updatedGame.userId,
+            houseId: gameObj.houseId,
+            score: updatedGame?.score,
+            date: gameObj.date,
+        };
+        console.log("updated object", updatedObject)
+        editGame(updatedObject)
+            .then(() => {
+                setGames((prevGames) =>
+                    prevGames.map((game) => (game.id === updatedObject.id ? { ...game, ...updatedObject } : game))
+                )
+            })
     }
-
-const toggle = () => {
-    setModal(!modal)
-}
-
-    //const houseModalState = (houseId) => {
-    //setUpdatedGame((prevState) => ({ ...prevState, houseId }))}
     
+    const toggle = () => {
+        setModal(!modal)
+        setSelectedHouse(null)
+    }
 
     return (
         <>
             <div>
-            
-                <Modal isOpen={modal} toggle={toggle} >
+
+                <Modal isOpen={modal} toggle={toggle} key={selectedHouse?.id} >
                     <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-                    <ModalBody>
+                    <ModalBody id={selectedHouse?.id}   >
                         {updatedGame && (
                             <>
                                 <ScoresInput
@@ -83,7 +85,7 @@ const toggle = () => {
                                     setScore={(score) => setUpdatedGame((prevState) => ({ ...prevState, score }))}
                                 />
 
-                                <Houses selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse}/>
+                                <Houses  houses={houses} selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse} setGameObj={setGameObj} />
                             </>
                         )}
 

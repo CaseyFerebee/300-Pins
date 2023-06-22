@@ -25,7 +25,7 @@ export const deleteGame = (id) => {
 }
 
 export const editGame = (gameObj) => {
-    return fetch(`${url}/game/${gameObj.id}`, {
+    return fetch(`${url}/games/${gameObj.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

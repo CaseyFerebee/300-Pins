@@ -1,23 +1,13 @@
-import { useState } from "react";
 import { DateSubmit } from "./Date";
 import { Houses } from "./Houses";
 import { ScoresInput } from "./Scores";
 import { addGame } from "../dataManager/GamesManager";
 import { Button } from "reactstrap";
 
-export const SubmitForm = ({selectedHouse, setSelectedHouse}) => {
+export const SubmitForm = ({selectedHouse, setSelectedHouse, gameObj, setGameObj, startDate, setStartDate, selectedDate}) => {
     const loggedInUser = JSON.parse(localStorage.getItem("bowler_user"));
-    const [startDate, setStartDate] = useState(new Date());
 
-    const [gameObj, setGameObj] = useState({
-        id: null,
-        userId: loggedInUser.id,
-        houseId: null,
-        score: 0,
-        date: null,
-    });
 
-    const formattedDate = new Date()
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault();
@@ -29,22 +19,23 @@ export const SubmitForm = ({selectedHouse, setSelectedHouse}) => {
                         userId: loggedInUser.id,
                         houseId: null,
                         score: 0,
-                        date: formattedDate.toLocaleDateString()
+                        date: selectedDate
                     })
                 });
                 setStartDate(new Date());
                 setSelectedHouse()
+                window.location.reload();
         }
     };
 
-    //console.log(gameObj)
     return (
         <>
+
             <ScoresInput score={gameObj.score} setScore={(score) => setGameObj((state) => ({ ...state, score }))} />
 
             <Houses setGameObj={setGameObj} selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse} />
 
-            <DateSubmit setGameObj={setGameObj} setStartDate={setStartDate} startDate={startDate} />
+            <DateSubmit setGameObj={setGameObj} setStartDate={setStartDate} startDate={startDate} selectedDate={selectedDate} />
 
             <Button
                 onClick={(clickEvent) => {
