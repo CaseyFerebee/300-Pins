@@ -8,37 +8,31 @@ import {
 } from 'reactstrap';
 
 
-export const Houses = ({down, setGameObj, selectedHouse, setSelectedHouse}) => {
-    
+export const Houses = ({ down, setGameObj, selectedHouse, setSelectedHouse, name }) => {
+
     const [houses, setHouses] = useState([])
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-    const handleClick=(e)=>{
-        setSelectedHouse(e.target.innerText)
+    const handleClick = (house) => {
+        setSelectedHouse(house)
         setGameObj((state) => {
-            return { ...state, houseId: parseInt(e.target.id)}
+            return { ...state, houseId: house.id }
         })
     }
-    const getAllTheHouses = () => {
 
-        getAllHouses()
-            .then(response => {
-                return setHouses(response)
-            })
-    }
     useEffect(() => {
-        getAllTheHouses()
-    },
-        []
-    )
+        getAllHouses().then((response) => {
+            setHouses(response);
+        });
+    }, []);
 
     return (
         <>
-            <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={down} onClick={handleClick}>
-                <DropdownToggle caret={true}>{selectedHouse ? selectedHouse : <>House</>}</DropdownToggle>
-                <DropdownMenu>
-                {houses.map((house) =>  <DropdownItem  key={house.id} id={house.id}>{house.name}</DropdownItem>)}
+            <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={down}  >
+                <DropdownToggle caret={true}>{selectedHouse ? selectedHouse.name : "House"}</DropdownToggle>
+                <DropdownMenu   >
+                    {houses.map((house) => <DropdownItem  key={house.id} onClick={() => handleClick(house)} >{house.name}</DropdownItem>)}
                 </DropdownMenu>
             </Dropdown>
         </>
