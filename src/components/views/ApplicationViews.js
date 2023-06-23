@@ -24,7 +24,7 @@ export const ApplicationViews = () => {
 
 		<FriendsList selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse}  setGameObj={setGameObj} gameObj={gameObj} />
 
-		<ScoresView selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse}  setGameObj={setGameObj}  gameObj={gameObj} selectedDate={selectedDate} />
+		<ScoresView selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse}  setGameObj={setGameObj}  gameObj={gameObj} selectedDate={selectedDate}  startDate={startDate}  setStartDate={setStartDate}      />
 
 	</>
 }

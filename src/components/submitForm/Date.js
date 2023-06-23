@@ -19,9 +19,9 @@ export const DateSubmit = ({setGameObj,setStartDate,startDate ,selectedDate}) =>
 
     useEffect(() => {
         setGameObj((state) => {
-            return { ...state, date:selectedDate }
+            return { ...state, date: selectedDate }
         });
-    }, [startDate, setGameObj, ]);
+    }, [ setGameObj ]);
 
     return (
         <form onSubmit={onFormSubmit} >
