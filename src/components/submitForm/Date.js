@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-export const DateSubmit = ({setGameObj,setStartDate,startDate ,selectedDate}) => {
+export const DateSubmit = ({setGameObj, setStartDate, startDate , selectedDate, }) => {
     const handleChange = (date) => {
         setStartDate(date);
     };
@@ -21,7 +21,7 @@ export const DateSubmit = ({setGameObj,setStartDate,startDate ,selectedDate}) =>
         setGameObj((state) => {
             return { ...state, date: selectedDate }
         });
-    }, [ setGameObj ]);
+    }, [startDate, setGameObj, ]);
 
     return (
         <form onSubmit={onFormSubmit} >

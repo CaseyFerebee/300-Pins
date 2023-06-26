@@ -20,6 +20,7 @@ import { getAllHouses } from "../dataManager/HouseManager";
 import { Houses } from "../submitForm/Houses";
 import { ScoresInput } from "../submitForm/Scores";
 import { DateSubmit } from "../submitForm/Date";
+import { format } from 'date-fns';
 
 export const ScoresView = ({
     selectedHouse,
@@ -64,6 +65,7 @@ export const ScoresView = ({
             })
             .then((fetchedGame) => {
                 let copy = { ...fetchedGame };
+                copy.date = format(new Date(copy.date), "MM/dd/yyyy")
                 setUpdatedGame(copy);
             });
     };
@@ -116,13 +118,11 @@ export const ScoresView = ({
                                     setSelectedHouse={(house) =>
                                         setUpdatedGame((prevState) => ({ ...prevState, houseId: house?.id }))
                                     }
-
                                     setGameObj={setGameObj}
-
                                 />
 
                                 <DateSubmit
-
+                                
                                     setGameObj={setGameObj}
                                     selectedDate={selectedDate}
                                     setStartDate={(date) => 
@@ -153,7 +153,8 @@ export const ScoresView = ({
                             <ListGroupItem key={`game-${game.id}`}>
                                 <></>
                                 {loggedInUser.name} scored {game.score} at{" "}
-                                {houses[game.houseId - 1]?.name} on {game.date}
+                                {houses[game.houseId - 1]?.name} on {""}
+                                {format(new Date(game.date), "MM/dd/yyyy")}
                             </ListGroupItem>
                             <Button
                                 id={game.id}
