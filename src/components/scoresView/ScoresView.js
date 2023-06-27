@@ -29,7 +29,8 @@ export const ScoresView = ({
     gameObj,
     startDate,
     selectedDate,
-    setStartDate,
+    setStartDate, 
+    selectedFriend
 }) => {
     const loggedInUser = JSON.parse(localStorage.getItem("bowler_user"));
     const [games, setGames] = useState([]);
@@ -39,15 +40,22 @@ export const ScoresView = ({
     
 
     useEffect(() => {
-        // Fetch the list of games for the logged-in user
-        getGamesByUserId(loggedInUser?.id).then((data) => {
-            setGames(data);
-        });
-
+        if (selectedFriend) {
+            getGamesByUserId(selectedFriend).then((data) => {
+                setGames(data);
+            });
+        } else {
+            // Fetch the list of games for the logged-in user
+            getGamesByUserId(loggedInUser?.id).then((data) => {
+                setGames(data);
+            });
+        }
+    
+        // Fetch the list of houses
         getAllHouses().then((data) => {
             setHouses(data);
         });
-    }, []);
+    }, [selectedFriend]);
 
     const handleDelete = (gameId) => {
         deleteGame(gameId).then(() => {
