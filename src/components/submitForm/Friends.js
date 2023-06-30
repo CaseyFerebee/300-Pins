@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
 import { getAllFriends } from '../dataManager/FriendsManager';
-import { getGamesByUserId } from '../dataManager/GamesManager';
 
 
 
-export const FriendsList = ({ cSelected, setCSelected, onFriendClick }) => {
 
-    const [friends, setFriends] = useState([])
+export const FriendsList = ({ cSelected, setCSelected, onFriendClick, friends, setFriends, games }) => {
 
-    
-        
         const onCheckboxBtnClick = (selected) => {
             const index = cSelected.indexOf(selected);
             if (index < 0) {
@@ -23,26 +19,21 @@ export const FriendsList = ({ cSelected, setCSelected, onFriendClick }) => {
         };
 
         const getAllTheFriends = () => {
-
             getAllFriends()
                 .then(response => {
-                    
                     return setFriends(response)
                 })
         }
 
         useEffect(() => {
             getAllTheFriends()
-        
-        },
-            []
-        )
+        },[])
 
         return (
             <div>
             
                 <h5>Friends</h5>
-                <ButtonGroup vertical= {true}>
+                <ButtonGroup  vertical= {true}>
                     {friends.length >0 && friends.map((user) => 
                         <Button   
                         key={user.id}

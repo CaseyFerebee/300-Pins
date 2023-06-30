@@ -30,3 +30,10 @@ p {
 .title--main {
   margin-block-end: 0;
 }
+
+
+.friends {
+  display: flex;
+  width: 155px;
+}
+
