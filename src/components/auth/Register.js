@@ -84,18 +84,7 @@ export const Register = (props) => {
                         required
                     />
                 </fieldset>
-                {/* <fieldset>
-                    <input
-                        onChange={(evt) => {
-                            const copy = { ...bowler };
-                            copy.isStaff = evt.target.checked;
-                            setCustomer(copy);
-                        }}
-                        type="checkbox"
-                        id="isStaff"
-                    />
-                    <label htmlFor="email"> I am an employee </label>
-                </fieldset> */}
+            
                 <fieldset>
                     <button type="submit"> Register </button>
                 </fieldset>

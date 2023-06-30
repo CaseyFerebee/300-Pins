@@ -30,13 +30,14 @@ export const SubmitForm = ({ selectedHouse, setSelectedHouse, gameObj, setGameOb
     };
 
     return (
-        <>
+        <div className="submitForm">
 
             <ScoresInput score={gameObj.score} setScore={(score) => setGameObj((state) => ({ ...state, score }))} selectedDate={selectedDate} startDate={startDate} setStartDate={setStartDate} />
 
             <Houses  setGameObj={setGameObj} selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse} />
 
             <DateSubmit setGameObj={setGameObj} setStartDate={setStartDate} startDate={startDate} selectedDate={selectedDate} />
+            
             <Button
                 onClick={handleSaveButtonClick}
                 className="btn btn-success"
@@ -46,7 +47,7 @@ export const SubmitForm = ({ selectedHouse, setSelectedHouse, gameObj, setGameOb
             >
                 Submit
             </Button>
-        </>
+        </div>
     );
 };
 

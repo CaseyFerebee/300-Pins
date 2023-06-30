@@ -2,7 +2,10 @@ const url = "http://localhost:8088"
 
 export const getGamesByUserId = (userId) => {
     return fetch(`${url}/games?userId=${userId}`)
-        .then((response) => response.json());
+        .then((response) => response.json())
+        .catch((error) => {
+            console.log("Error retrieving games:", error);
+        });
 };
 
 export const addGame = (gameOjb) => {
@@ -21,7 +24,7 @@ export const deleteGame = (id) => {
     return fetch(`${url}/games/${id}`, {
         method: "DELETE"
     })
-    .then(response => response.json())
+        .then(response => response.json())
 }
 
 export const editGame = (gameObj) => {

@@ -21,6 +21,7 @@ import { Houses } from "../submitForm/Houses";
 import { ScoresInput } from "../submitForm/Scores";
 import { DateSubmit } from "../submitForm/Date";
 import { format } from 'date-fns';
+import { getAllFriends } from "../dataManager/FriendsManager";
 
 export const ScoresView = ({
     selectedHouse,
@@ -29,19 +30,22 @@ export const ScoresView = ({
     gameObj,
     startDate,
     selectedDate,
-    setStartDate, 
-    selectedFriend
+    selectedFriend,
+    setFriends,
+    games,
+    setGames
 }) => {
     const loggedInUser = JSON.parse(localStorage.getItem("bowler_user"));
-    const [games, setGames] = useState([]);
+
     const [houses, setHouses] = useState([]);
     const [modal, setModal] = useState(false);
     const [updatedGame, setUpdatedGame] = useState({});
-    
+
+
 
     useEffect(() => {
         if (selectedFriend) {
-            getGamesByUserId(selectedFriend).then((data) => {
+            getGamesByUserId(selectedFriend.id).then((data) => {
                 setGames(data);
             });
         } else {
@@ -50,11 +54,15 @@ export const ScoresView = ({
                 setGames(data);
             });
         }
-    
-        // Fetch the list of houses
+
         getAllHouses().then((data) => {
             setHouses(data);
         });
+
+        getAllFriends().then((data) => {
+            setFriends(data);
+        });
+
     }, [selectedFriend]);
 
     const handleDelete = (gameId) => {
@@ -65,16 +73,16 @@ export const ScoresView = ({
 
     const handleInputChange = (gameId, e) => {
         toggle();
-        console.log(e);
+        console.log(e.target.value);
         getGameById(gameId)
             .then((data) => {
-                console.log("data", data[0]);
-                return data[0]; // Return the fetched game object
-            })
-            .then((fetchedGame) => {
-                let copy = { ...fetchedGame };
-                copy.date = format(new Date(copy.date), "MM/dd/yyyy")
-                setUpdatedGame(copy);
+                console.log("data", data);
+                const fetchedGame = data.find((game) => game.id === gameId);
+                if (fetchedGame) {
+                    let copy = { ...fetchedGame };
+                    copy.date = format(new Date(copy.date), "MM/dd/yyyy");
+                    setUpdatedGame(copy);
+                }
             });
     };
 
@@ -130,12 +138,12 @@ export const ScoresView = ({
                                 />
 
                                 <DateSubmit
-                                
+
                                     setGameObj={setGameObj}
                                     selectedDate={selectedDate}
-                                    setStartDate={(date) => 
-                                    
-                                        setUpdatedGame((prevState) => ({ ...prevState, date: date}))
+                                    setStartDate={(date) =>
+
+                                        setUpdatedGame((prevState) => ({ ...prevState, date: date }))
                                     }
                                     startDate={startDate}
                                 />
@@ -160,9 +168,19 @@ export const ScoresView = ({
                         <React.Fragment key={game.id}>
                             <ListGroupItem key={`game-${game.id}`}>
                                 <></>
-                                {loggedInUser.name} scored {game.score} at{" "}
-                                {houses[game.houseId - 1]?.name} on {""}
-                                {format(new Date(game.date), "MM/dd/yyyy")}
+                                {selectedFriend ? (
+                                    <>
+                                        {selectedFriend.name} scored {game.score} at {houses[game.houseId - 1]?.name} on {""}
+                                        {format(new Date(game.date), "MM/dd/yyyy")}
+                                    </>
+                                ) : (
+                                    <>
+                                        {loggedInUser?.name} scored {game.score} at {houses[game.houseId - 1]?.name} on {""}
+                                        {format(new Date(game.date), "MM/dd/yyyy")}
+                                    </>
+                                )}
+
+
                             </ListGroupItem>
                             <Button
                                 id={game.id}
@@ -191,10 +209,4 @@ export const ScoresView = ({
     );
 };
 
-// const updatedInputChange = {
-//     id: gameId,
-//     userId: loggedInUser?.id,
-//     houseId: selectedHouse?.id,
-//     score: e.target.value,
-//     date: gameObj.date
-// }
+
