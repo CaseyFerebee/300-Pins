@@ -38,7 +38,7 @@ export const ApplicationViews = () => {
 		<Container>
 
 			<h1 className="title--main">300-Pins</h1>
-			<div>Let's Bowl</div>
+			<h1 className="change-color">Let's Bowl</h1>
 			<Row>
 				<Col>
 					<ScoresView selectedHouse={selectedHouse} setSelectedHouse={setSelectedHouse} setGameObj={setGameObj} gameObj={gameObj} selectedDate={selectedDate} startDate={startDate} setStartDate={setStartDate} cSelected={cSelected} setCSelected={setCSelected} selectedFriend={selectedFriend} setFriends={setFriends} friends={friends} games={games} setGames={setGames} />

@@ -32,10 +32,10 @@ export const FriendsList = ({ cSelected, setCSelected, onFriendClick, friends, s
         return (
             <div>
             
-                <h5>Friends</h5>
+                <h5 className='color-more-stuff'>Friends</h5>
                 <ButtonGroup  vertical= {true}>
                     {friends.length >0 && friends.map((user) => 
-                        <Button   
+                        <Button   className='friends-color' 
                         key={user.id}
                         color="primary"
                         outline

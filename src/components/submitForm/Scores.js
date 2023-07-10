@@ -12,7 +12,7 @@ export const ScoresInput = ({ score, setScore }) => {
         <div>
             <Input
                 required
-                className="w-50"
+                className="w-25"
                 type="number"
                 min={0}
                 max={300}

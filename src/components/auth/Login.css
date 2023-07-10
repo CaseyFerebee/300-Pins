@@ -13,6 +13,7 @@ fieldset {
     display: inline-block;
     margin: 0 auto;
     text-align: left;
+    color: white
 }
 
 .form--login > fieldset > input[type="email"] {
@@ -47,7 +48,7 @@ fieldset {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(https://www.checkatrade.com/blog/wp-content/uploads/2021/11/Feature-How-much-does-it-cost-to-build-a-bowling-alley.jpg);
+    background-image: url(https://wallpapers.com/images/hd/bowling-barn-style-50zt7mu09sumuos4.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -74,4 +75,33 @@ fieldset {
     top: 53%;
     left: 50%;
     transform: translate(-50%, -10%);
+    background-color: black;
+}
+
+a:visited {
+    color: white;
+}
+a:hover {
+    color: white;
+}
+a:active {
+    color: white;
+}
+
+.register-button {
+    color: white;
+}
+
+.register-background {
+    background-image: url("https://png.pngtree.com/background/20230516/original/pngtree-bowling-balls-lining-the-wall-in-a-dark-room-picture-image_2605694.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

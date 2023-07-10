@@ -41,8 +41,6 @@ export const ScoresView = ({
     const [modal, setModal] = useState(false);
     const [updatedGame, setUpdatedGame] = useState({});
 
-
-
     useEffect(() => {
         if (selectedFriend) {
             getGamesByUserId(selectedFriend.id).then((data) => {
@@ -161,12 +159,12 @@ export const ScoresView = ({
                 </Modal>
             </div>
 
-            <Card style={{ width: "18rem" }}>
+            <Card style={{ width: "35rem" }}>
                 <CardHeader>My scores</CardHeader>
-                <ListGroup>
+                <ListGroup >
                     {games.map((game) => (
-                        <React.Fragment key={game.id}>
-                            <ListGroupItem key={`game-${game.id}`}>
+                        <React.Fragment    key={game.id}>
+                            <ListGroupItem className="game-color" key={`game-${game.id}`}>
                                 <></>
                                 {selectedFriend ? (
                                     <>
